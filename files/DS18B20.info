@@ -1,0 +1,34 @@
+{
+ "name": "DS18B20",
+ "type": "plugin",
+ "description": "DS18B20",
+ "version": "0.0.1",
+ "homepage": "",
+ "files": ["DS18B20.init", "DS18B20.info", "DS18B20.lua", "DS18B20.run", "DS18B20.html"],
+ "page": "DS18B20.html",
+ "img": "https://raw.githubusercontent.com/bondrogeen/DS18B20/master/doc/logo.jpg",
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/bondrogeen/DS18B20"
+ },
+ "author": {
+  "name": "bondrogeen",
+  "email": "bondrojeen@gmail.com"
+ },
+ "native": [
+  {
+   "id": "run",
+   "val": false,
+   "type": "checkbox",   
+   "name": "Run"
+  }, {
+   "id": "pin",
+   "val": "4",
+   "type": "select",
+   "values": [1,2,3,4,5,6,7,9,10,11,12],
+   "name": "Pin"
+  }
+ ],
+ "license": "MIT",
+ "modules": ["ow"]
+}
