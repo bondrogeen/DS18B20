@@ -52,7 +52,7 @@
     <div class="row">
      <h2>List device</h2>
      <div class="s12">
-      <ul class="l-g">
+      <ul id="list" class="l-g">
        <li class="lg-i">List 1<span>0.2.3</span></li>
       </ul>
       <br>
@@ -60,7 +60,7 @@
     </div>
     <div class="row">
      <div class="s12">
-      <button class="right info">Scan</button>
+      <button class="right info" onclick="scan();">Scan</button>
      </div>
     </div>
    </div>
@@ -71,6 +71,60 @@
    document.cookie = "id=";
    location.href = '/login.html';
   }
+
+  function send(page, data, callback) {
+   var req = new XMLHttpRequest();
+   req.open("POST", page, true);
+   req.setRequestHeader('Content-Type', 'application/json');
+   req.addEventListener("load", function() {
+    if (req.status < 400) {
+     callback(req.responseText);
+    } else {
+     callback(false);
+    }
+   });
+   req.send(JSON.stringify(data));
+  }
+
+  function scan(){
+   send("DS18B20.lua",{get:"all"},function(res){
+    if(res){
+     console.log(res);
+     if (res !== "false" || res !== "error") {
+					try {
+						res = JSON.parse(res);
+						} catch (err) {
+       console.log(err);
+							return;
+						}
+					var key = document.getElementById("list");
+					key.innerHTML = "";
+					for (var i = 0, ln = res.length; i < ln; i++) {
+						if (res[i] !== null) {
+							var li = document.createElement('li');
+							li.id = res[i];
+							li.className = 'lg-i';
+							li.innerHTML = (i+1) + ' )  <b>' + res[i]+'</b> °C';
+							key.appendChild(li);
+						}
+					}
+				}
+    }
+   });
+  }
+
+//  function del(d) {
+//   send("RC522_key.lua", {
+//    del: d
+//   }, function(res) {
+//    if (res === "true") {
+//     document.getElementById(d).remove();
+//    }
+//   });
+//  }
+//  setInterval(function() {
+//   keyGet();
+//  }, 10000);
 
  </script>
 </body>

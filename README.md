@@ -2,6 +2,7 @@
  
 The plugin DS18B20 for [DoT](https://github.com/bondrogeen/DoT)
 
+![alt-текст](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Screenshot1.jpg")
 
 ## GET or POST request
 
