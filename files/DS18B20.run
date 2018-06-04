@@ -3,6 +3,14 @@ local r
  if t.run then 
   r=dofile("DS18B20.lua")({init=t.pin})
   r=dofile("DS18B20.lua")({find=t.pin})
+  _DoT:on("dot", function (t)
+    local temp = dofile("DS18B20.lua")({get="all"})
+    if(_M and temp)then
+     for i, val in ipairs(temp) do
+      _M.pub("info/DS18B20/"..i,val)
+     end    
+    end
+  end)
  else
   print("Plugin not started")
  end
