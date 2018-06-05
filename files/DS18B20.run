@@ -5,7 +5,7 @@ local r
   r=dofile("DS18B20.lua")({find=t.pin})
   _DoT:on("dot", function (t)
     local temp = dofile("DS18B20.lua")({get="all"})
-    if(_M and temp)then
+    if(_M and type(temp)=="table")then
      for i, val in ipairs(temp) do
       _M.pub("info/DS18B20/"..i,val)
      end    
