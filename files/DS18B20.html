@@ -53,7 +53,7 @@
      <h2>List device</h2>
      <div class="s12">
       <ul id="list" class="l-g">
-       <li class="lg-i">List 1<span>0.2.3</span></li>
+       <li class="lg-i">adr : <span class="right">value</span></li>
       </ul>
       <br>
      </div>
@@ -99,14 +99,14 @@
 						}
 					var key = document.getElementById("list");
 					key.innerHTML = "";
-					for (var i = 0, ln = res.length; i < ln; i++) {
+      for (i in res) {
 						if (res[i] !== null) {
 							var li = document.createElement('li');
 							li.id = res[i];
 							li.className = 'lg-i';
-							li.innerHTML = (i+1) + ' )  <b>' + res[i]+'</b> °C';
+							li.innerHTML = (i+1) + ' :  <span><b>' + res[i]+'  °C</b></span>';
 							key.appendChild(li);
-						}
+      }
 					}
 				}
     }

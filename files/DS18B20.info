@@ -2,7 +2,7 @@
  "name": "DS18B20",
  "type": "plugin",
  "description": "DS18B20",
- "version": "0.0.2",
+ "version": "0.0.4",
  "homepage": "",
  "files": ["DS18B20.init", "DS18B20.info", "DS18B20.lua", "DS18B20.run", "DS18B20.html"],
  "page": "DS18B20.html",

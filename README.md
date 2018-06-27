@@ -22,7 +22,7 @@ http://192.168.1.49/DS18B20.lua?scan=1
 
 http://192.168.1.49/DS18B20.lua?get=1 
 
-> Get the temperature of all found sensors. Returns an array of data  ( ["25.8750","23.8125","23.9375"] )
+> Get the temperature of all found sensors. Returns an array of data  ( "124EAB300":"30.2500","FFF63116153":"32.5000","FFC73816153":"32.5625"} )
 
 http://192.168.1.49/DS18B20.lua?get=all
 
@@ -35,7 +35,8 @@ pin = 4  -- gpio2
 
 dofile("DS18B20.lua")({init=pin}) -- Sets a pin in 1-Wire mode.
 
-addr = dofile("DS18B20.lua")({find=pin})  --Search for all  1-Wire device.
+addr = dofile("DS18B20.lua")({find=pin})  --Search for all  1-Wire device. Return the number of sensors found
+print(addr)
 
 -- dofile("DS18B20.lua")({scan=1}) -- Command to all devices for temperature conversion
 
@@ -43,15 +44,19 @@ r=dofile("DS18B20.lua")({get=1})  -- Getting the temperature of the first sensor
 print(r)
 
 -- or get the temperature of all found sensors
-r=dofile("DS18B20.lua")({get="all"})
-print(r[1])
-print(r[2])
-print(r[3])
+
+ r=dofile("DS18B20.lua")({get="all"})
+ 
+ for i, v in pairs(r) do
+  print(i.." : "..v)
+ end
 
 ```
 
 ## Changelog
 
+### 0.0.4 (2018-06-27)
+* (bondrogeen) minor fix.
 ### 0.0.2 (2018-05-24)
 * (bondrogeen) init.
 

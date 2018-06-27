@@ -39,7 +39,7 @@ local a,t,r=_ds18b20.adr,{}
 x=tonumber(x)and tonumber(x)or x
 if type(x)=="number"then
  if a and x<=#a then r=temp(_ds18b20.adr[x])else r="none"end
-else for i,v in ipairs(_ds18b20.adr)do t[i]=temp(v) end
+else for i,v in ipairs(_ds18b20.adr)do t[string.format("%X%X%X%X%X%X", _ds18b20.adr[i]:byte(2,7))]=temp(v) end
  r=t
 end
 scan()

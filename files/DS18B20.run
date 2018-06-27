@@ -6,8 +6,8 @@ local r
   _DoT:on("dot", function (t)
     local temp = dofile("DS18B20.lua")({get="all"})
     if(_M and type(temp)=="table")then
-     for i, val in ipairs(temp) do
-      _M.pub("info/DS18B20/"..i,val)
+     for k, v in pairs(temp) do
+      _M.pub("info/DS18B20/"..k,v)
      end    
     end
   end)
