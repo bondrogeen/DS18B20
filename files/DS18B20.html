@@ -72,15 +72,15 @@
    location.href = '/login.html';
   }
 
-  function send(page, data, callback) {
+  function send(page, data, cb) {
    var req = new XMLHttpRequest();
    req.open("POST", page, true);
    req.setRequestHeader('Content-Type', 'application/json');
    req.addEventListener("load", function() {
     if (req.status < 400) {
-     callback(req.responseText);
+     if (cb) cb(req.responseText);
     } else {
-     callback(false);
+     if (cb) cb(false);
     }
    });
    req.send(JSON.stringify(data));
@@ -113,18 +113,6 @@
    });
   }
 
-//  function del(d) {
-//   send("RC522_key.lua", {
-//    del: d
-//   }, function(res) {
-//    if (res === "true") {
-//     document.getElementById(d).remove();
-//    }
-//   });
-//  }
-//  setInterval(function() {
-//   keyGet();
-//  }, 10000);
 
  </script>
 </body>
