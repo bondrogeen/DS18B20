@@ -13,7 +13,7 @@ local function find()
   repeat
     address = ow.search(pin)
     if address then
-      print(address:byte(1,8))
+--      print(address:byte(1,8))
       sensors[#sensors + 1] = address
     end
   until not address
@@ -60,7 +60,7 @@ local function init(pin)
 end
 
 return function (t)
-  local r
+  local r = false
   if (t.init) then r = init(t.init) end
   if (t.find and pin) then r = find() end
   if (t.scan and pin) then r = scan() end
