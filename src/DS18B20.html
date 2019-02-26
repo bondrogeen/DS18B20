@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  //= template/head.html
+ <title>DS18B20</title>
+
+ <style>
+
+
+ </style>
+</head>
+
+<body>
+  //= template/header.html
+ <div id="Modal" class="modal hide">
+  <div class="m-cont">
+   <span class="close" id="close_m">&times;</span>
+   <div class="m-body">
+    <p>Save settings?</p>
+   </div>
+   <div class="m-foo">
+    <button id="save_m" class="success">Yes</button>
+    <button id="close" class="danger">No</button>
+   </div>
+  </div>
+ </div>
+ <div class="cont">
+  <div class="row">
+   <div class="s12 m2 l2">
+
+   </div>
+   <div class="s12 m10 l-9 ">
+    <h1>DS18B20</h1>
+    <div class="row">
+     <h2>List device</h2>
+     <div class="s12">
+      <ul id="list" class="l-g">
+       <li class="lg-i">adr : <span class="right">value</span></li>
+      </ul>
+      <br>
+     </div>
+    </div>
+    <div class="row">
+     <div class="s12">
+      <button class="right info" onclick="scan();">Scan</button>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+   //= template/footer.html
+
+ <script>
+   document.getElementById("loader").classList.add('hide');
+
+  function logout() {
+   document.cookie = "id=";
+   location.href = '/login.html';
+  }
+
+  function send(page, data, cb) {
+   var req = new XMLHttpRequest();
+   req.open("POST", page, true);
+   req.setRequestHeader('Content-Type', 'application/json');
+   req.addEventListener("load", function() {
+    if (req.status < 400) {
+     if (cb) cb(req.responseText);
+    } else {
+     if (cb) cb(false);
+    }
+   });
+   req.send(JSON.stringify(data));
+  }
+
+  function scan(){
+   send("DS18B20.lua",{get:0},function(res){
+    if(res){
+     console.log(res);
+     if (res !== "false" || res !== "error") {
+					try {
+						res = JSON.parse(res);
+						} catch (err) {
+       console.log(err);
+							return;
+						}
+					var key = document.getElementById("list");
+					key.innerHTML = "";
+      for (i in res) {
+						if (res[i] !== null) {
+							var li = document.createElement('li');
+							li.id = res[i];
+							li.className = 'lg-i';
+							li.innerHTML = (i+1) + ' :  <span><b>' + res[i]+'  °C</b></span>';
+							key.appendChild(li);
+      }
+					}
+				}
+    }
+   });
+  }
+
+
+ </script>
+</body>
+
+</html>

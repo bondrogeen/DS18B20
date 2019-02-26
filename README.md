@@ -24,8 +24,7 @@ http://192.168.1.49/DS18B20.lua?get=1
 
 > Get the temperature of all found sensors. Returns an object of data  ( "124EAB300":"30.2500","FFF63116153":"32.5000","FFC73816153":"32.5625"} )
 
-http://192.168.1.49/DS18B20.lua?get=all
-
+http://192.168.1.49/DS18B20.lua?get=0
 
 or
 
@@ -41,17 +40,38 @@ print(dofile("DS18B20.lua")({find=true})) --Search for all  1-Wire device. Retur
 
 print(dofile("DS18B20.lua")({get=1})) -- Getting the temperature of the first sensor found
 
--- or get the temperature of all found sensors
-
- r=dofile("DS18B20.lua")({get="all"})
+r = dofile("DS18B20.lua")({get=0}) -- or get the temperature of all found sensors
  
- for i, v in pairs(r) do
+for i, v in pairs(r) do
   print(i.." : "..v)
- end
+end
 
 ```
 
+## Contributing
+Contributions are welcome.
+
+The package is made up of 2 main folders:
+
+- /src (Source files)
+- /files (Compiled and compressed files)
+
+To setup and run a local copy:
+1. Clone this repo with `git clone https://github.com/bondrogeen/DoT.DS18B20`
+2. Run `npm install` in root folder
+
+After installing the dependencies, you can start working with the sources.
+
+3. Run `gilp build` (Compile and compress files)
+
+When you're done working on your changes, submit a PR with the details and include a 
+screenshot if you've changed anything visually.
+
+
 ## Changelog
+
+### 0.0.5 (20119-02-15)
+* (bondrogeen) fix mqtt.
 
 ### 0.0.4 (2018-06-27)
 * (bondrogeen) minor fix.

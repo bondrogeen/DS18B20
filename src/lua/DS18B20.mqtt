@@ -1,0 +1,17 @@
+return function (time)
+  local r
+  if time and _DS18B20 then
+    _DS18B20.timer = tmr.create()
+    _DS18B20.timer:register(5000, tmr.ALARM_AUTO, function(t)
+        local temp = dofile("DS18B20.lua")({get = 0})
+        if(_M and type(temp) == "table") then
+          for k, v in pairs(temp) do
+            _M:pub("DS18B20/info/"..k, v)
+          end
+        end
+      end)
+    _DS18B20.timer:interval(time * 1000)
+    _DS18B20.timer:start()
+    end
+  return r
+end

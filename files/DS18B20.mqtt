@@ -1,10 +1,1 @@
-return function (t)
-local r
- if t then 
- _DS18B20.timer=tmr.create()
- _DS18B20.timer:register(5000,tmr.ALARM_AUTO,function(t)
- local temp = dofile("DS18B20.lua")({get="all"}) if(_M and type(temp)=="table")then for k, v in pairs(temp)do _M:pub("info/DS18B20/"..k,v) end end end)
- _DS18B20.timer:interval(t*1000) _DS18B20.timer:start()
- end
- return r
-end
+return function(a)local b;if a and _DS18B20 then _DS18B20.timer=tmr.create()_DS18B20.timer:register(5000,tmr.ALARM_AUTO,function(c)local d=dofile("DS18B20.lua")({get=0})if _M and type(d)=="table"then for e,f in pairs(d)do _M:pub("DS18B20/info/"..e,f)end end end)_DS18B20.timer:interval(a*1000)_DS18B20.timer:start()end;return b end

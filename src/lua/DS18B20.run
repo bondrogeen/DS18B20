@@ -1,0 +1,10 @@
+return function (t)
+  local r
+  if t.run then 
+    r = dofile("DS18B20.lua")({init = t.pin})
+    r = dofile("DS18B20.lua")({find = t.pin})
+  else
+    print("Plugin not started")
+  end
+  return r
+end
